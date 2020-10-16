@@ -1,15 +1,22 @@
-import multer from 'multer';
+const multer = require('multer');
 
-import { resolve } from 'path';
+const { resolve } = require('path');
 
 const tempFolder = resolve(__dirname, '..', '..', 'tmp')
 
-export default {
+module.exports = {
   directory: tempFolder,
   storage: multer.diskStorage({
     destination: tempFolder,
     filename: (req, file, callback) => {
-      const fileName = `${file.filename}`
+
+      const FileFilename = String(file.originalname);
+
+      const filenameRemoveSpace = FileFilename.replace(/\s/g,'');
+
+      console.log(filenameRemoveSpace);
+
+      const fileName = `${filenameRemoveSpace}`;
 
       return callback(null, fileName)
     },
