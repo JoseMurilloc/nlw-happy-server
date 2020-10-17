@@ -14,7 +14,6 @@ module.exports = {
 
       const filenameRemoveSpace = FileFilename.replace(/\s/g,'');
 
-      console.log(filenameRemoveSpace);
 
       const fileName = `${filenameRemoveSpace}`;
 
