@@ -56,9 +56,11 @@ class OrphanagersController {
       about,
       instructions,
       opening_hours,
-      open_on_weekends,
+      open_on_weekends: Boolean(open_on_weekends),
       images
     }
+
+    console.log(data);
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
