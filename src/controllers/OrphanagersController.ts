@@ -49,6 +49,8 @@ class OrphanagersController {
       return { path: image.filename }
     })
 
+    const parserOpenOnWeekends = open_on_weekends === 'true' ? true : false;
+
     const data = {
       name,
       latitude,
@@ -56,11 +58,9 @@ class OrphanagersController {
       about,
       instructions,
       opening_hours,
-      open_on_weekends: Boolean(open_on_weekends),
+      open_on_weekends: parserOpenOnWeekends,
       images
     }
-
-    console.log(data);
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -86,6 +86,20 @@ class OrphanagersController {
     await orphanagesRepository.save(orphanage)
 
     return response.status(201).json({ orphanage });
+  }
+
+  async delete(request: Request, response: Response) {
+
+    try {
+      const { id } = request.params;
+      const orphanagesRepository = getRepository(Orphanage);
+
+      await orphanagesRepository.delete(id)
+
+      return response.status(204).json()
+    } catch(err) {
+      console.log(err);
+    }
   }
 }
 

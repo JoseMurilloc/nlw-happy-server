@@ -18,5 +18,6 @@ routes.post('/sessions', SessionController.create)
 routes.get('/orphanages', OrphanagersController.index);
 routes.get('/orphanages/:id', OrphanagersController.show);
 routes.post('/orphanages', upload.array('images'), OrphanagersController.create);
+routes.delete('/orphanages/:id', OrphanagersController.delete);
 
 export default routes;
