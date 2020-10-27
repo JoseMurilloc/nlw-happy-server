@@ -22,6 +22,9 @@ export default class Orphanage {
   instructions: string;
 
   @Column()
+  pending: boolean;
+
+  @Column()
   opening_hours: string;
 
   @Column()

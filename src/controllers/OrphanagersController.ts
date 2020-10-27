@@ -12,7 +12,10 @@ class OrphanagersController {
     const orphanagesRepository = getRepository(Orphanage);
 
     const orphanages = await orphanagesRepository.find({
-      relations: ['images']
+      relations: ['images'],
+      where: {
+        pending: true,
+      }
     });
 
     return response.json(orphanagesView.renderMany(orphanages));
@@ -23,7 +26,10 @@ class OrphanagersController {
     const orphanagesRepository = getRepository(Orphanage);
 
     const orphanage = await orphanagesRepository.findOneOrFail(id, {
-      relations: ['images']
+      relations: ['images'],
+      where: {
+        pending: true,
+      }
     });
 
     return response.json(orphanagesView.render(orphanage));
