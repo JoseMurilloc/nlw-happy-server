@@ -6,6 +6,7 @@ import multer from 'multer'
 import UserController from './controllers/UserController';
 import SessionController from './controllers/SessionController';
 import ForgotPassword from './controllers/ForgotPassword';
+import ensureAuthenticated from './middlewares/ensureAuthenticated';
 
 const upload = multer(uploadConfig)
 
@@ -20,7 +21,7 @@ routes.post('/sessions', SessionController.create)
 routes.get('/orphanages', OrphanagersController.index);
 routes.get('/orphanages/:id', OrphanagersController.show);
 routes.post('/orphanages', upload.array('images'), OrphanagersController.create);
-routes.delete('/orphanages/:id', OrphanagersController.delete);
+routes.delete('/orphanages/:id', ensureAuthenticated, OrphanagersController.delete);
 
 routes.post('/forgot', ForgotPassword.create);
 
